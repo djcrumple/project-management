@@ -1,4 +1,102 @@
-Raphael.fn.action = function( x, y ) {
+
+function Task() {
+	// Text assoicated with Task, this may be
+	// a name or a description.
+	this.text = '';
+
+	// The only task that does not have a parent is the 
+	// root task of a project. All other tasks are considered
+	// sub tasks. 
+	this.parent = undefined;
+
+	// The list of tasks that must be completed in
+	// order to complete this task. If this array is empty,
+	// then this Task is a leaf node. In that case, this task
+	// must be marked completed for it's  parents to become
+	// completed.
+	this.subTasks = new Array();
+
+	// The sub tasks can either be 'actions' or 'steps'. Actions
+	// can be completed in parrallel. Steps must be completed in
+	// sequence.
+	this.subTasksType = undefined;
+
+	this.addTask = function( task ) {
+		this.subTasks[ this.subTasks.length ] = task;
+	}
+
+	this.render = function() {
+		for( var i = 0; i < this.subTasks.length; i++ ) {
+			this.subTasks[i].render();
+		}
+	}
+
+}
+
+function Project() {
+	// All Tasks for the project must be added under
+	// this root task.
+	this.rootTask = new Task();
+
+	// Parse the text representation of a task tree into
+	// Task nodes.
+	//
+	// text uses wiki format:
+	//   * First action
+	//   *# step 1
+	//   *# step 2
+	//   * Second action
+	//   *# step 1
+	//   *# step 2
+	this.parseTasks = function( text ) {
+		var lines 			= text.split( "\n" );
+		var curParent 		= this.rootTask;
+		var prevTask 		= undefined;
+		var prevDepth 		= 1;
+		//alert( lines.length );
+
+		for( var i = 0; i < lines.length; i++ ) {
+			var line 	= lines[i];
+			var depth 	= line.length;
+			var task 	= new Task();
+
+			console.log( line );
+			console.log( depth );
+
+			// If this depth has changed, we either need to descend or ascend 
+			// the tree.
+			if( depth > prevDepth ) {
+				// Descend by making the previous task the new parent.
+				curParent = prevTask;
+
+			} else if( depth < prevDepth ) {
+				// Ascend by finding the corrent parent for the current depth.
+				
+				// This is the number of levels that we need to go
+				// up in the tree.
+				var rise = prevDepth - depth;
+
+				for( var j = 0; j < rise; j++ ) {
+					curParent = curParent.parent;
+				}
+			}
+
+			curParent.addTask( task );
+			task.parent = curParent;
+
+			prevTask = task;
+			prevDepth = depth;
+			
+		}
+	}
+
+	this.render = function( paper ) {
+		this.rootTask.render();
+	}
+}
+
+
+Raphael.fn.task = function( x, y ) {
 	return this.circle( x, y, 20 ).attr( {fill: 'red'} );
 }
 
@@ -26,18 +124,3 @@ Raphael.fn.connection = function( action1, action2 ) {
 }
 
 
-
-window.onload = function() {
-	var paperWidth = 400;
-	var paperHeight = 500;
-	var paper = Raphael( 'holder', paperWidth, paperHeight );
-
-	var a1 = paper.action( 50, 30 );
-	var a2 = paper.action( 100, 100 );
-	//paper.circle( 50, 50, 20 ).attr( {fill: 'blue'} );
-	
-	var c1 = paper.connection( a1, a2 );
-	c1.toBack();
-
-
-}

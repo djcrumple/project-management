@@ -26,10 +26,33 @@
 			}
 
 		</style>
+		<script type='text/javascript'>
+			function buttonClick() {
+				var text 		= document.getElementById( 'text-tree' ).value;
+				var myProject 	= new Project();
+
+				var paperWidth 		= 400;
+				var paperHeight 	= 500;
+				var paper 			= Raphael( 'holder', paperWidth, paperHeight );
+
+				var a1 = paper.task( 50, 30 );
+				var a2 = paper.task( 100, 100 );
+
+				var c1 = paper.connection( a1, a2 );
+			
+				c1.toBack();
+
+
+				myProject.parseTasks( text );
+				myProject.render( paper );
+
+			}
+		</script>
     </head> 
     <body> 
 		<div id='text-area'>
 			<textarea id='text-tree'></textarea>
+			<button onclick="buttonClick();">Save</button>
 		</div>
         <div id="holder"></div> 
     </body> 
