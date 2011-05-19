@@ -27,21 +27,20 @@
 
 		</style>
 		<script type='text/javascript'>
+			var paperWidth 		= 400;
+			var paperHeight 	= 500;
+			var paper 			= undefined;
+
+			window.onload = function() {
+				paper = Raphael( 'holder', paperWidth, paperHeight );
+			}
+
+
 			function buttonClick() {
 				var text 		= document.getElementById( 'text-tree' ).value;
 				var myProject 	= new Project();
 
-				var paperWidth 		= 400;
-				var paperHeight 	= 500;
-				var paper 			= Raphael( 'holder', paperWidth, paperHeight );
-
-				//var a1 = paper.task( 50, 30 );
-				//var a2 = paper.task( 100, 100 );
-//
-				//var c1 = paper.connection( a1, a2 );
-			//
-				//c1.toBack();
-
+				paper.clear();
 
 				myProject.parseTasks( text );
 				myProject.render( paper, 40, 40 );
