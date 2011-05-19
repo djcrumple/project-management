@@ -2,7 +2,7 @@
 <html lang="en"> 
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-        <title>Raphael  Graffle</title> 
+        <title>Project Slightly Less Awesome</title> 
         <script src="raphael-min.js" type="text/javascript" charset="utf-8"></script> 
         <script src="pms-tree.js" type="text/javascript" charset="utf-8"></script> 
 		<style type='text/css'>
@@ -35,16 +35,16 @@
 				var paperHeight 	= 500;
 				var paper 			= Raphael( 'holder', paperWidth, paperHeight );
 
-				var a1 = paper.task( 50, 30 );
-				var a2 = paper.task( 100, 100 );
-
-				var c1 = paper.connection( a1, a2 );
-			
-				c1.toBack();
+				//var a1 = paper.task( 50, 30 );
+				//var a2 = paper.task( 100, 100 );
+//
+				//var c1 = paper.connection( a1, a2 );
+			//
+				//c1.toBack();
 
 
 				myProject.parseTasks( text );
-				myProject.render( paper );
+				myProject.render( paper, 40, 40 );
 
 			}
 		</script>
