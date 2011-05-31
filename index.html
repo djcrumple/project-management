@@ -31,8 +31,51 @@
 			var paperHeight 	= 500;
 			var paper 			= undefined;
 
+			// These are some test strings.
+			var testStrings = new Array();
+			testStrings[0] = 
+				'*' + "\n" +
+				'**' + "\n" +
+				'**' + "\n" +
+				'***' + "\n" +
+				'****' + "\n" +
+				'****' + "\n" +
+				'***' + "\n" +
+				'**' + "\n" +
+				'***' + "\n" +
+				'***' + "\n" +
+				'*' + "\n" +
+				'**' + "\n" +
+				'**' + "\n" +
+				'**';
+
+			testStrings[1] = 
+				'#' + "\n" +
+				'##' + "\n" +
+				'##' + "\n" +
+				'###' + "\n" +
+				'####' + "\n" +
+				'####' + "\n" +
+				'###' + "\n" +
+				'##' + "\n" +
+				'###' + "\n" +
+				'###' + "\n" +
+				'#' + "\n" +
+				'##' + "\n" +
+				'##' + "\n" +
+				'##';
+
+
 			window.onload = function() {
+
 				paper = Raphael( 'holder', paperWidth, paperHeight );
+
+				//alert( window.location.search.substring(1) );
+				testString = testStrings[ window.location.search.substring(1) ];
+
+				document.getElementById( 'text-tree' ).value = testString;
+
+
 			}
 
 

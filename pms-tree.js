@@ -70,7 +70,7 @@ function Task() {
 					paper.connection( this.subTasks[i-1], this.subTasks[i] );
 				}
 			} else {
-				console.log( "Unkown sub task type: " + this.subTaskType );
+				//console.log( "Unkown sub task type: " + this.subTaskType );
 				img.attr( {'fill': 'blue'} );
 				//alert( "Uh oh" );
 			}
@@ -112,8 +112,8 @@ function Project() {
 			var depth 	= line.length;
 			var task 	= new Task();
 
-			console.log( line );
-			console.log( depth );
+			//console.log( line );
+			//console.log( depth );
 
 			// If this depth has changed, we either need to descend or ascend 
 			// the tree.
@@ -126,9 +126,9 @@ function Project() {
 					curParent.subTasksType = TASK_TYPE_ACTION;
 				} else if( line[ line.length - 1 ] == '#' ) {
 					curParent.subTasksType = TASK_TYPE_STEP;
-					console.log( "HERE" );
+					//console.log( "HERE" );
 				} else {
-					console.log( "Can't determine task type: " + line[ line.length - 1 ] );
+					//console.log( "Can't determine task type: " + line[ line.length - 1 ] );
 				}
 
 			} else if( depth < prevDepth ) {
@@ -233,7 +233,7 @@ Raphael.fn.connection = function( task1, task2 ) {
 		'';
 
 
-	console.log( pathString );
+	//console.log( pathString );
 	var p = this.path( pathString ).attr( {stroke: 'black', 'stroke-width': 3} );
 
 	p.toBack();
