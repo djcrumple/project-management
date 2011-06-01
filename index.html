@@ -65,6 +65,25 @@
 				'##' + "\n" +
 				'##';
 
+			testStrings[2] = 
+				'#' + "\n" +
+				'#*' + "\n" +
+				'#*' + "\n" +
+				'#*#' + "\n" +
+				'#*#*' + "\n" +
+				'#*#*' + "\n" +
+				'#*#' + "\n" +
+				'#*' + "\n" +
+				'#*#' + "\n" +
+				'#*#' + "\n" +
+				'#' + "\n" +
+				'##' + "\n" +
+				'##' + "\n" +
+				'##*' + "\n" +
+				'##*' + "\n" +
+				'##*' + "\n" +
+				'##';
+
 
 			window.onload = function() {
 
@@ -73,7 +92,9 @@
 				//alert( window.location.search.substring(1) );
 				testString = testStrings[ window.location.search.substring(1) ];
 
-				document.getElementById( 'text-tree' ).value = testString;
+				if( testString != undefined ) {
+					document.getElementById( 'text-tree' ).value = testString;
+				}
 
 
 			}
